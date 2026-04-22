@@ -1,0 +1,10 @@
+# Ignore all object files
+*.o
+
+# Ignore specific binaries
+baciu
+src/test
+
+# Ignore the Packages file (if it's the source of those 1M+ lines)
+Packages
+TODO.txt
