@@ -18,6 +18,7 @@ typedef struct{
     int pkgcount;
 }PKGMAP;
 
+int search_index(char* keyword);
 void flush_cache(void);
 void fs_mmap_index(PKGMAP* PKGMAP);
 int fs_init_directories(void);

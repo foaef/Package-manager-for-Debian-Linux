@@ -65,6 +65,9 @@ int main(int argc, char **argv){
     if(strcmp(argv[1], "update") == 0){
         return update_index();
     }
+    if(strcmp(argv[1], "search") == 0){
+        return search_index(argv[2]);
+    }
     return -1;
 }
 

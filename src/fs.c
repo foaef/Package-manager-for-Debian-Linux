@@ -97,3 +97,15 @@ void flush_cache(void){
     char* cmd = "rm -rf cache/*.deb";
     system(cmd);
 }
+
+int search_index(char* keyword){
+    char* fmt = "grep %s Packages";
+    char* cmd = malloc(sizeof(char)*(strlen(fmt) + strlen(keyword) + 5));
+    if(!cmd){
+        perror("malloc error");
+        return -1;
+    }
+    sprintf(cmd, fmt, keyword);
+    system(cmd);
+    return 0;
+}
