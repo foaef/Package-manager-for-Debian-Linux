@@ -131,7 +131,7 @@ int download_to_file(DebianPackage** queue, const int queue_cnt){
 int download_index(){
     CURL* handle = curl_easy_init();
     CURLcode res;
-    char* outfile = "Packages.gz";
+    char* outfile = "/var/baciu/packages/Packages.gz";
     FILE* file = fopen(outfile, "wb");
     if(!file){
         perror("couldnt open /pacman");
@@ -154,7 +154,7 @@ int download_index(){
 
     if(res == CURLE_OK){
         printf("index downloaded, extracting...\n");
-        system("gunzip -f Packages.gz");
+        system("gunzip -f /var/baciu/packages/Packages.gz");
         return 0;
     }
 

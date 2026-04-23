@@ -12,13 +12,11 @@
 
 int install(char** arguments){
     //initialising stuff
-    FILE* f = fopen("Packages", "r");
+    FILE* f = fopen("/var/baciu/packages/Packages", "r");
     if(!f){
         perror("could not open file index");
         return -1;
     }
-    fs_init_directories();
-    ensure_cache_path_dir();
     PKGMAP* MAP = malloc(sizeof(PKGMAP));
     fs_mmap_index(MAP);
     
@@ -55,6 +53,10 @@ int main(int argc, char **argv){
         printf("Usage: %s <option> <package name>\n", argv[0]);
         return -1;
     }
+
+    fs_init_directories();
+    ensure_cache_path_dir();
+
     //install, uninstall, update
     if(strcmp(argv[1], "install") == 0){
         return install(argv);

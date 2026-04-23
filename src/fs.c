@@ -6,7 +6,7 @@
 #include"fs.h"
 
 int fs_init_directories(void) {
-    int rc = system("mkdir -p \"$HOME/Desktop/pacman/cache\" \"$HOME/Desktop/pacman/packages\"");
+    int rc = system("sudo mkdir -p /var/baciu/cache /var/baciu/packages && sudo chmod -R 777 /var/baciu");
     if (rc != 0) {
         fprintf(stderr, "error initializing directories (mkdir returned %d)\n", rc);
         return -1;
@@ -14,49 +14,25 @@ int fs_init_directories(void) {
     return 0;
 }
 
-int ensure_cache_path_dir(void){
-    char* HOME = getenv("HOME");
-    if(!HOME){
-        fprintf(stderr, "couldnt get home env variable");
+int ensure_cache_path_dir(void) {
+    int res = system("mkdir -p /var/cache/baciu"); 
+    if (res != 0) {
+        fprintf(stderr, "mkdir failed\n");
         return -1;
     }
-    char* format = "%s \"%s/Desktop/pacman/cache\"";
-    size_t path_size = (size_t)snprintf(NULL, 0, format, HOME)+ 1;
-    char* path = malloc(path_size+20);
-    snprintf(path, path_size + 10, format, "mkdir -p ", HOME);
-    int res = system(path);
-    if(res != 0){
-        fprintf(stderr, "cache path does not exist  (mkdir returned %d)", res);
-        free(path);
-        return -1;
-    }
-    free(path);
     return 0;
 }
 
 char* build_cache_path_for_package(DebianPackage* pkg){
-    char* HOME = getenv("HOME");
-    char* base_path;
-
-    if (HOME) {
-        base_path = HOME;
-    } else {
-        // Fallback for sudo/root environment
-        base_path = "/tmp"; 
-    }
-    if(!HOME){
-        fprintf(stderr, "couldnt get home env variable");
-        return NULL;
-    }
-    char* ongfrfrnocappath = "%s/Desktop/pacman/cache/%s-%s.deb";
-    size_t path_size = (size_t)snprintf(NULL, 0, ongfrfrnocappath, base_path, pkg->name, pkg->version)+ 1;
+    char* ongfrfrnocappath = "/var/baciu/cache/%s-%s.deb";
+    size_t path_size = (size_t)snprintf(NULL, 0, ongfrfrnocappath, pkg->name, pkg->version)+ 1;
     char* path = malloc(path_size);
     if(!path){
         fprintf(stderr,"malloc error: build_cache_path_for_package");
         return NULL;
     }
 
-    int verificare = snprintf(path, path_size, ongfrfrnocappath, base_path, pkg->name, pkg->version);
+    int verificare = snprintf(path, path_size, ongfrfrnocappath, pkg->name, pkg->version);
     if(verificare < 0){
         fprintf(stderr, "couldnt get path");
         free(path);
@@ -71,7 +47,7 @@ char* build_cache_path_for_package(DebianPackage* pkg){
 }
 
 void fs_mmap_index(PKGMAP* PKGMAP){
-    FILE* f = fopen("Packages", "r");
+    FILE* f = fopen("/var/baciu/packages/Packages", "r");
     if(!f){
         perror("couldnt open package index");
         return;
@@ -94,12 +70,12 @@ void fs_mmap_index(PKGMAP* PKGMAP){
 }
 
 void flush_cache(void){
-    char* cmd = "rm -rf cache/*.deb";
+    char* cmd = "rm -rf /var/baciu/cache/*.deb";
     system(cmd);
 }
 
 int search_index(char* keyword){
-    char* fmt = "grep %s Packages";
+    char* fmt = "grep '%s' /var/baciu/packages/Packages";
     char* cmd = malloc(sizeof(char)*(strlen(fmt) + strlen(keyword) + 5));
     if(!cmd){
         perror("malloc error");
