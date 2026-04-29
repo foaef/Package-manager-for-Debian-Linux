@@ -6,7 +6,7 @@
 #include"fs.h"
 
 int fs_init_directories(void) {
-    int rc = system("sudo mkdir -p /var/baciu/cache /var/baciu/packages && sudo chmod -R 777 /var/baciu");
+    int rc = system("sudo mkdir -p /var/baciu/cache /var/baciu/packages /var/baciu/user_built && sudo chmod -R 777 /var/baciu");
     if (rc != 0) {
         fprintf(stderr, "error initializing directories (mkdir returned %d)\n", rc);
         return -1;
@@ -15,7 +15,7 @@ int fs_init_directories(void) {
 }
 
 int ensure_cache_path_dir(void) {
-    int res = system("mkdir -p /var/cache/baciu"); 
+    int res = system("mkdir -p /var/baciu/cache"); 
     if (res != 0) {
         fprintf(stderr, "mkdir failed\n");
         return -1;

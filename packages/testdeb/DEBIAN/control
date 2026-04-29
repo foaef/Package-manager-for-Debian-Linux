@@ -1,0 +1,18 @@
+Package: 0xffff
+Version: 0.9-1
+Installed-Size: 167
+Maintainer: Sebastian Reichel <sre@debian.org>
+Architecture: amd64
+Depends: libc6 (>= 2.14), libusb-0.1-4 (>= 2:0.1.12)
+Description: Open Free Fiasco Firmware Flasher
+Multi-Arch: foreign
+Homepage: https://github.com/pali/0xFFFF
+Description-md5: 183c49f6505eb3432d1b069800f1f5b6
+Tag: admin::hardware, hardware::usb, implemented-in::c,
+ interface::commandline, role::program, scope::utility, works-with::file
+Section: misc
+Priority: optional
+Filename: pool/main/0/0xffff/0xffff_0.9-1_amd64.deb
+Size: 59232
+MD5sum: 3de8282ef18b53b11c8ad6d6481b3a14
+SHA256: 2c5a35bc4830379b565369ccbca608535d64577fb3244869a17cb6de8d9bda7d

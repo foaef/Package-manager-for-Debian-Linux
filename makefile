@@ -9,7 +9,7 @@ TARGET = baciu
 PREFIX = /usr/local
 
 # Source files and Object files
-SRCS = src/main.c src/downloader.c src/fs.c src/resolver.c src/Index_parser.c src/installer.c
+SRCS = src/main.c src/downloader.c src/repo.c src/fs.c src/resolver.c src/Index_parser.c src/installer.c
 OBJS = $(SRCS:.c=.o)
 
 # Default rule: Build the binary
