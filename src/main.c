@@ -2,7 +2,6 @@
 #include<string.h>
 #include<stdio.h>
 #include<unistd.h>
-#include<cjson/cJSON.h>
 #include"resolver.h"
 #include"fs.h"
 #include"downloader.h"
