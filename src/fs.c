@@ -54,7 +54,7 @@ void fs_mmap_index(PKGMAP* PKGMAP){
     }
     char line[1024];
     PKGMAP->pkgcount = 0;
-    PKGMAP->MMAP = malloc(65000*sizeof(Stanza));
+    PKGMAP->MMAP = malloc(150000*sizeof(Stanza));
     while(fgets(line, 1024, f)){
         if(strncmp(line,  "Package: ", 9) == 0){
             char* name = strdup(line+ 9);
@@ -75,7 +75,7 @@ void flush_cache(void){
 }
 
 int search_index(char* keyword){
-    char* fmt = "grep '%s' /var/baciu/packages/Packages";
+    char* fmt = "grep -A 10 'Package: %s' /var/baciu/packages/Packages";
     char* cmd = malloc(sizeof(char)*(strlen(fmt) + strlen(keyword) + 5));
     if(!cmd){
         perror("malloc error");

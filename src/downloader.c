@@ -138,7 +138,7 @@ int download_index(){
         curl_easy_cleanup(handle);
         return -1;
     }
-    char* url = "https://ftp.debian.org/debian/dists/bookworm/main/binary-amd64/Packages.gz";
+    char* url = "https://deb.debian.org/debian/dists/testing/main/binary-amd64/Packages.gz";
 
     curl_easy_setopt(handle, CURLOPT_URL, url);
     curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L);

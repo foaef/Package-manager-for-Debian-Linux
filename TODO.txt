@@ -1,1 +1,8 @@
-pula mea de variabile de env locale ca sudo te baga in root si fute tot  cacatul vezi ce faci
+Define a folder structure for baciu to initialise for big projects have more presets saved in plaintext
+
+FOLDER:
+    SUB1
+    SUB2
+        SUBSUB1
+
+type shi
