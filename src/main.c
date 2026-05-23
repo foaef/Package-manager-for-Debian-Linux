@@ -72,6 +72,9 @@ int main(int argc, char **argv){
     if(strcmp(argv[1], "build") == 0){
         return package_folder(argv[2]);
     }
+    if(strcmp(argv[1], "index") == 0){
+        return open_index();
+    }
     return -1;
 }
 

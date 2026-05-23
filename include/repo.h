@@ -3,5 +3,6 @@
 
 int append_user_packages();
 int package_folder(char* path);
+int open_index();
 
 #endif

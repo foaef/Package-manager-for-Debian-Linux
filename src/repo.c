@@ -22,3 +22,17 @@ int package_folder(char* path){
     return res;
 }
 
+int open_index(){
+    char* fmt = "open /var/baciu/packages/Packages";
+    int cmd_size = strlen(fmt);
+    char* cmd = malloc(cmd_size*sizeof(char));
+    if(!cmd){
+        perror("malloc error");
+        return -1;
+    }
+    sprintf(cmd, fmt);
+    int res = system(cmd);
+    free(cmd);
+    return res;
+}
+
